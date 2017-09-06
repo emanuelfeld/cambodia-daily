@@ -55,7 +55,7 @@ def run(language):
     print('beginning scrape of {} site'.format(language))
     db = dataset.connect(INFO[language]['db'])
     table = db.get_table('url', primary_id='url', primary_type='String')
-    [added_count, seen_count] = scrape_site(INFO[language]['url'], table, language)
+    scrape_site(INFO[language]['url'], table, language)
 
 
 if __name__ == '__main__':
