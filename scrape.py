@@ -40,11 +40,13 @@ def scrape_site(url, table, language):
     tree = html.fromstring(homepage.content)
     date_urls = [url for url in tree.xpath('//*[@id="archivesdropfront"]/select/option/@value') if url]
     for url in date_urls:
+        table.insert(dict(url=url))
         page = 1
         print('scraping: {}'.format(url))
         paginated_url = scrape_page(url, table, language)
         print('...page {}'.format(page))
         while paginated_url:
+            table.insert(dict(url=paginated_url))
             page += 1
             url = paginated_url[0]
             print('...page {}'.format(page))
